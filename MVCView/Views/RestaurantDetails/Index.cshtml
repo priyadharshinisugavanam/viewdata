@@ -3,20 +3,36 @@
     ViewBag.Title = "Index";
 }
 <h1>Index</h1>
-@foreach(Restaurant.Entity.RestaurantEntity restaurantEntity in @Model)
+@Html.ActionLink("Create new Restaurant", "Create")
+<br />
+@if (TempData["Message"] != null)
 {
-    <ol>
-        
-        <li>
-            @restaurantEntity.RestaurantName
-        </li>
-        <li>
-            @restaurantEntity.RestaurantType
-        </li>
-        <li>
-            @restaurantEntity.Location
-        </li>
-    </ol>
-   
+    @Html.Label((string)TempData["Message"])
 }
+@foreach (Restaurant.Entity.RestaurantEntity restaurantEntity in @Model)
+{
+<table border="1">
+    <tr>
+        <td>
+            @restaurantEntity.RestaurantName
+        </td>
+        <td>
+            @restaurantEntity.RestaurantType
+        </td>
+        <td>
+            @restaurantEntity.Location
+        </td>
+
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { restaurantName = restaurantEntity.RestaurantName })
+            @Html.ActionLink("Delete", "Delete", new { restaurantName = restaurantEntity.RestaurantName })
+        </td>
+
+    </tr>
+    
+</table>
+}
+
+
 

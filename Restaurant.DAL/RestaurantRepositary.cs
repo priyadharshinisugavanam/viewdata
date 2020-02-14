@@ -22,5 +22,27 @@ namespace Restaurant.DAL
         {
             return restaurantEntities;
         }
+        public void AddRestaurant(RestaurantEntity restaurantEntity)
+        {
+            restaurantEntities.Add(restaurantEntity);
+        }
+        public RestaurantEntity GetRestaurant(string restaurantName)
+        {
+            return restaurantEntities.Find(id => id.RestaurantName == restaurantName);
+        }
+        public void DeleteRestaurant(string restaurantName)
+        {
+            RestaurantEntity restaurant = GetRestaurant(restaurantName);
+            if (restaurant != null)
+            {
+                restaurantEntities.Remove(restaurant);
+            }
+        }
+        public void UpdateRestaurant(RestaurantEntity entity)
+        {
+            RestaurantEntity restaurantEntity = GetRestaurant(entity.RestaurantName);
+            restaurantEntity.RestaurantName = entity.RestaurantName;
+            restaurantEntity.Location = entity.Location;
+        }
     }
 }

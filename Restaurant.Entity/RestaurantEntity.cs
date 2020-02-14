@@ -18,5 +18,9 @@ namespace Restaurant.Entity
             this.RestaurantType = restaurantType;
             this.Location = location;
         }
+        public RestaurantEntity()
+        {
+
+        }
     }
 }

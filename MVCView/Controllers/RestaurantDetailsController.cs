@@ -39,5 +39,36 @@ namespace MVCView.Controllers
             TempData["Restaurant"] = restaurants;
             return View();
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost ]
+        public ActionResult Create(RestaurantEntity restaurantEntity)
+        {
+            restaurantRepositary.AddRestaurant(restaurantEntity);
+            TempData["Message"] = "Restaurant Added";
+            return RedirectToAction("Index");
+        }
+        public ActionResult Edit(string restaurantName)
+        {
+            RestaurantEntity restaurant = restaurantRepositary.GetRestaurant(restaurantName);
+            return View(restaurant);
+        }
+        public ActionResult Delete(string restaurantName)
+        {
+            restaurantRepositary.DeleteRestaurant(restaurantName);
+            TempData["Message"] = "Restaurant deleted";
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult Update(RestaurantEntity restaurant)
+        {
+            restaurantRepositary.UpdateRestaurant(restaurant);
+            TempData["Message"] = "Restaurant Updated";
+            return RedirectToAction("Index");
+        }
+
     }
 }
